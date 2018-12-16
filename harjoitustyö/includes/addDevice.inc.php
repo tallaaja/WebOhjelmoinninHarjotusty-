@@ -18,17 +18,17 @@ if (isset($_POST['addDevice-Submit'])) {
     exit();
   }
   else {
-	mysqli_stmt_bind_param($stmt, "sssssss", $name, $model, $brand, $desc, $address, $owner, $category);
-	mysqli_stmt_execute($stmt);
-	header("Location: ../admin.php?success");
-	exit();
+	  mysqli_stmt_bind_param($stmt, "sssssss", $name, $model, $brand, $desc, $address, $owner, $category);
+	  mysqli_stmt_execute($stmt);
+	  header("Location: ../admin.php?success");
+	  exit();
   }
   mysqli_stmt_close($stmt);
   mysqli_close($conn);
   }
 
 else {
-header("Location: ../home.php");
-exit();
+  header("Location: ../home.php");
+  exit();
 }
 ?>
