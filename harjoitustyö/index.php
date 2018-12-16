@@ -8,7 +8,7 @@
 			<?php
 
 				if (isset($_SESSION["userId"])) {
-					echo '<p> </p>'
+					echo '<p> </p>';
 				}
 				else {
 					echo '<p> You must sign in to use the page!  </p>';
