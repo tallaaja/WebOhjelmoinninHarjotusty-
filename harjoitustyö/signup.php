@@ -14,7 +14,7 @@
 					<button type="submit" name="signup-submit">Submit</button>
 				</form>
 			</section>
-		<div>
+		</div>
 	</main>
 
 <?php

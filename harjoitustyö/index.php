@@ -8,10 +8,10 @@
 			<?php
 
 				if (isset($_SESSION["userId"])) {
-					echo '<p> You are logged in! </p>';
+					echo '<p> </p>'
 				}
 				else {
-					echo '<p> You are logged out! </p>';
+					echo '<p> You must sign in to use the page!  </p>';
 				}
 			?>
 

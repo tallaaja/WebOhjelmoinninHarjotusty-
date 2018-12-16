@@ -14,7 +14,6 @@
           <input type="text" name="address" placeholder="Address">
           <input type="text" name="owner" placeholder="Owner">
           <input type="text" name="category" placeholder="Category">
-          <input type="text" name="serial number" placeholder="Serial number">
 					<button type="submit" name="addDevice-Submit">Lisää</button>
 				</form>
 			</section>
