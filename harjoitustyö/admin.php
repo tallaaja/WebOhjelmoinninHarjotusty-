@@ -55,6 +55,7 @@ if ($result->num_rows > 0) {
 			echo $row['ID'];
 			if($row['bookerIdDevices'] == NULL){
 				echo $row['ID'];
+<<<<<<< HEAD
 				echo '<td><form action="includes/deleteDevices.inc.php" method="post">
 							<input type="hidden" name="deleteId" value='.$row['ID'].'>
 							<input type="submit" name="delete-submit" value="Delete" />
@@ -64,6 +65,15 @@ if ($result->num_rows > 0) {
 						<input type="hidden" name="editId" value='.$row['ID'].'>
 						<input type="submit" name="edit-submit" value="edit" />
 				</form></td>';
+=======
+				echo '<td><form action="includes/editDevices.inc.php" method="post">
+							<input type="hidden" name="deleteId" value='.$row['ID'].'>
+							<input type="submit" name="delete-submit" value="Delete" />
+					</form></td>';
+
+
+			}
+>>>>>>> 8b197f90702f18d6ebe93b28f78e8924e9cb3a77
 			echo '</tr>';
 		}
 	}
