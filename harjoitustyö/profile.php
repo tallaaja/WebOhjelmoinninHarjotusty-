@@ -46,6 +46,37 @@ if ($result->num_rows > 0) {
         </form>
         <li><a href="/harjoitustyö/changepassword.php">Change password</a></li>
 
+<h2>Booked devices</h2>
 <?php
-    echo '<li><a href="index.php">Back to home</a></li>';
+if (isset($_SESSION["userId"]))
+{
+  $sql = "SELECT `ID`, `nameDevices`, `modelDevices`, `brandDevices`, `descriptionDevices`,
+   `addressDevices`, `ownerDevices`, `categoryDevices`, `bookerIdDevices` FROM devices WHERE bookerIdDevices = $userId";
+  $result = $conn->query($sql);
+  echo '<table>';
+  echo '<tr>';
+  echo '<th>Name</th>';
+  echo '<th>Model</th>';
+  echo '<th>Brand</th>';
+  echo '<th>Description</th>';
+  echo '<th>Address</th>';
+  echo '<th>Owner</th>';
+  echo '<th>Category</th>';
+  while ($row = $result ->fetch_assoc()) {
+    echo '<tr>';
+    echo '<td>'.$row['nameDevices'].'</td>';
+    echo '<td>'.$row['modelDevices'].'</td>';
+    echo '<td>'.$row['brandDevices'].'</td>';
+    echo '<td>'.$row['descriptionDevices'].'</td>';
+    echo '<td>'.$row['addressDevices'].'</td>';
+    echo '<td>'.$row['ownerDevices'].'</td>';
+    echo '<td>'.$row['categoryDevices'].'</td>';
+
+    echo '</tr>';
+  }
+}
+else {
+  echo '<p> You dont have any booked devices </p>';
+}
+
 ?>

@@ -12,12 +12,12 @@ table, th, td {
 			<?php
 
 				if (isset($_SESSION["userId"])) {
-					
+
 					echo '<p> </p>';
 					$sql = "SELECT `ID`, `nameDevices`, `modelDevices`, `brandDevices`, `descriptionDevices`,
 					 `addressDevices`, `ownerDevices`, `categoryDevices`, `bookerIdDevices` FROM devices";
 					$result = $conn->query($sql);
-					
+
 					if ($result->num_rows > 0) {
 						// output data of each row
 						echo '<table>';
@@ -38,7 +38,7 @@ table, th, td {
 								echo '<td>'.$row['addressDevices'].'</td>';
 								echo '<td>'.$row['ownerDevices'].'</td>';
 								echo '<td>'.$row['categoryDevices'].'</td>';
-								
+
 								if($row['bookerIdDevices'] == NULL){
 									echo $row['ID'];
 									echo '<td><form action="includes/book.inc.php" method="post">
@@ -46,7 +46,7 @@ table, th, td {
 												<input type="submit" name="bookthis" value="Book" />
 										</form></td>';
 								}
-								
+
 								echo '</tr>';
 						}
 					} else {
@@ -54,6 +54,8 @@ table, th, td {
 						header("Location: ../index.php?error=youhavenoorders");
 					}
 				}
+
+
 				else {
 					echo '<p> You must sign in to use the page!  </p>';
 				}
