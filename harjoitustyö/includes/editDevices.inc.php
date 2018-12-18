@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 if (isset($_POST['editDevice-sumbit'])) {
   require "dbh.inc.php";
 
@@ -12,7 +11,7 @@ if (isset($_POST['editDevice-sumbit'])) {
   $id =$_POST['idDevices'];
 
 $sql = "UPDATE devices SET nameDevices=?, modelDevices=? descriptionDevices=?, addressDevices=?, ownerDevices=?,
- categoryDevices=? WHERE idDevices= '$id'";
+ categoryDevices=? WHERE idDevices=".$id.;
  $stmt = mysqli_stmt_init($conn);
  if (!mysqli_stmt_prepare($stmt, $sql)) {
      header("Location: ../editDevices.php?error=sqlerror");
@@ -30,8 +29,6 @@ else {
   header("Location: ../index.php");
 
 }
- ?>
-=======
 session_start();
 
 if (isset($_POST['delete-submit'])) {
@@ -64,4 +61,3 @@ if (isset($_POST['delete-submit'])) {
 
 }
 ?>
->>>>>>> 8b197f90702f18d6ebe93b28f78e8924e9cb3a77
