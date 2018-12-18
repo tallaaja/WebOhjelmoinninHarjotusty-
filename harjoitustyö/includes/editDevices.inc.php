@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 if (isset($_POST['editDevice-sumbit'])) {
   require "dbh.inc.php";
 
@@ -10,58 +9,45 @@ if (isset($_POST['editDevice-sumbit'])) {
   $owner =$_POST['ownerDevices'];
   $category =$_POST['categoryDevices'];
   $id =$_POST['idDevices'];
-
-$sql = "UPDATE devices SET nameDevices=?, modelDevices=? descriptionDevices=?, addressDevices=?, ownerDevices=?,
- categoryDevices=? WHERE idDevices= '$id'";
- $stmt = mysqli_stmt_init($conn);
- if (!mysqli_stmt_prepare($stmt, $sql)) {
-     header("Location: ../editDevices.php?error=sqlerror");
-     exit();
- }
- else {
-     mysqli_stmt_bind_param($stmt, "ssssss", $userId,$model,$desc,$addres,$owner,$category);
-     mysqli_stmt_execute($stmt);
-     header("Location ..admin.php?success");
-     exit();
-     }
+  
+  $sql = "SELECT nameDevices, modelDevices, descriptionDevices,addressDevices,ownerDevices, categoryDevices FROM devices WHERE ID =?";
+  $stmt = mysqli_stmt_init($conn);
+  if (!mysqli_stmt_prepare($stmt, $sql)) {
+      header("Location: ../index.php?error=sqlerror");
+      echo $id;
+      exit();
+  }
+  else {
+      mysqli_stmt_bind_param($stmt, "s", $id);
+      mysqli_stmt_execute($stmt);
+      mysqli_stmt_store_result($stmt);
+      $resultCheck = mysqli_stmt_num_rows($stmt);
+      if ($resultCheck < 0 ){
+          header("Location: ../signup.php?error=usertaken&mail=".$email);
+          exit();		
+      }
+      else {
+            $sql = "UPDATE devices SET nameDevices=?, modelDevices=?, descriptionDevices=?, addressDevices=?, ownerDevices=?,
+            categoryDevices=? WHERE ID= '$id'";
+            $stmt = mysqli_stmt_init($conn);
+            if (!mysqli_stmt_prepare($stmt, $sql)) {
+                header("Location: editDevices.inc.php?error=sqlerror");
+                echo $id;
+                exit();
+            }
+            else {
+                mysqli_stmt_bind_param($stmt, "ssssss", $name,$model,$desc,$address,$owner,$category);
+                mysqli_stmt_execute($stmt);
+                header("Location: ../admin.php?success");
+                exit();
+                }
+            }
  mysqli_close($conn);
+}
 }
 else {
   header("Location: ../index.php");
-
+    exit();
 }
- ?>
-=======
-session_start();
 
-if (isset($_POST['delete-submit'])) {
-    require 'dbh.inc.php';
-    $deleteId = $_POST['deleteId'];
-
-    $sql = "DELETE FROM devices WHERE ID = ?";
-    $stmt = mysqli_stmt_init($conn);
-    if (!mysqli_stmt_prepare($stmt, $sql)) {
-        header("Location: ../signup.php?error=sqlerror");
-        exit();
-    }
-    else {
-        mysqli_stmt_bind_param($stmt, "s", $deleteId);
-        mysqli_stmt_execute($stmt);
-        mysqli_stmt_store_result($stmt);
-
-        $sql = "DELETE FROM devices WHERE ID = '$deleteId'";
-        $stmt = mysqli_stmt_init($conn);
-        if ($conn->query($sql) === TRUE) {
-            //echo "Record updated successfully";
-            header("Location: ../admin.php?successfullydeleted");
-            exit();
-        } else {
-            //echo "Error updating record: " . $conn->error;
-            header("Location: ../index.php?sqlerror");
-        }
-    }
-    mysqli_close($conn);
-
-}
 ?>
->>>>>>> 8b197f90702f18d6ebe93b28f78e8924e9cb3a77

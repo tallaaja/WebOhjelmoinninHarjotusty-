@@ -20,19 +20,19 @@ $result = $conn->query($sql);
 
       echo '<form class="" action="includes/editDevices.inc.php" method="post">
         Name: <br>
-        <input name="nameDevices" type="text" value="<?= $name?>"></br>
+        <input name="nameDevices" type="text" value='.$name.'></br>
         Model:<br>
-        <input name="modelDevices" type="text" value="<?= $model?>"></br>
+        <input name="modelDevices" type="text" value='.$model.'></br>
         Description:<br>
-        <input name="descriptionDevices" type="text" value="<?= $desc?>"></br>
+        <input name="descriptionDevices" type="text" value='.$desc.'></br>
         address:<br>
-        <input name="addressDevices" type="text" value="<?= $address?>"></br>
+        <input name="addressDevices" type="text" value='.$address.'></br>
         ownder:<br>
-        <input name="ownerDevices" type="text" value="<?= $owner?>"></br>
+        <input name="ownerDevices" type="text" value='.$owner.'></br>
         category:<br>
-        <input name="categoryDevices" type="text" value="<?= $category?>"></br>
-        <input name="idDevices" type="hidden" value="<?= $editId?>">
-        <button type="button" name="editDevice-sumbit">Edit</button> </br>;'
+        <input name="categoryDevices" type="text" value='.$category.'></br>
+        <input name="idDevices" type="hidden" value='.$editId.'>
+        <button type="submit" name="editDevice-sumbit">Edit</button> </br>';
 
 
 
@@ -40,7 +40,7 @@ $result = $conn->query($sql);
   }
 }
 else {
-header("Location: index.php");
+header("Location: index.php222");
 exit();
 }
 
