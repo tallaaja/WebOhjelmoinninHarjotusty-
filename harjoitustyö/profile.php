@@ -44,7 +44,7 @@ if ($result->num_rows > 0) {
             <input type="text" name="emailUsers" value="<?= $email?>"><br><br>
             <button type="submit" name="update-submit">Change name and/or email</button><br><br>
         </form>
-        <li><a href="/harjoitustyö/changepassword.php">Change password</a></li>
+        <li><a href="changepassword.php">Change password</a></li>
 
 <h2>Booked devices</h2>
 <?php
