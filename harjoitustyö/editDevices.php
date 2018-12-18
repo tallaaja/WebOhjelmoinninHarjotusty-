@@ -24,7 +24,7 @@ $result = $conn->query($sql);
         Model:<br>
         <input name="modelDevices" type="text" value="'.$model.'"><br>
         Description:<br>
-        <input name="descriptionDevices" type="text" value="'.$desc.'"><br>
+        <input name="descriptionDevices" type="text" placeholder="'.$desc.'"><br>
         address:<br>
         <input name="addressDevices" type="text" value="'.$address.'"><br>
         ownder:<br>
@@ -32,17 +32,12 @@ $result = $conn->query($sql);
         category:<br>
         <input name="categoryDevices" type="text" value="'.$category.'"><br>
         <input name="idDevices" type="hidden" value="'.$editId.'">
-        <button type="button" name="editDevice-sumbit">Edit</button>';
+        <button type="submit" name="editDevice-submit">Edit</button>';
 
 
 
     }
   }
 }
-else {
-header("Location: index.php");
-exit();
-}
-
 
 ?>

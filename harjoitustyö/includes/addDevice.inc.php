@@ -28,7 +28,7 @@ if (isset($_POST['addDevice-Submit'])) {
   }
 
 else {
-  header("Location: ../home.php");
+  header("Location: ../home.php?error");
   exit();
 }
 ?>

@@ -63,16 +63,13 @@ if ($result->num_rows > 0) {
 						<input type="hidden" name="editId" value='.$row['ID'].'>
 						<input type="submit" name="edit-submit" value="edit" />
 				</form></td>';
-				echo '<td><form action="includes/editDevices.inc.php" method="post">
-							<input type="hidden" name="deleteId" value='.$row['ID'].'>
-							<input type="submit" name="delete-submit" value="Delete" />
-					</form></td>';
+
 
 
 			}
 			echo '</tr>';
 		}
-	
+
 
 ?>
 
