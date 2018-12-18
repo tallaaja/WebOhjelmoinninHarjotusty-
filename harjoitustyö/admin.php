@@ -20,6 +20,52 @@
 		<div>
 	</main>
 
+
 <?php
-	require "footer.php";
+require 'includes/dbh.inc.php';
+if (isset($SESSION_['userId'])) {
+	$userId = $_SESSION['userId'];
+}
+else {
+	$userId = "null";
+}
+$sql = "SELECT `ID`, `nameDevices`, `modelDevices`, `brandDevices`, `descriptionDevices`,
+ `addressDevices`, `ownerDevices`, `categoryDevices`, `bookerIdDevices` FROM devices";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+		echo '<h2> Edit or delete devices </h2>';
+		echo '<table>';
+		echo '<tr>';
+		echo '<th>Name</th>';
+		echo '<th>Model</th>';
+		echo '<th>Brand</th>';
+		echo '<th>Description</th>';
+		echo '<th>Address</th>';
+		echo '<th>Owner</th>';
+		echo '<th>Category</th>';
+		while($row = $result->fetch_assoc()) {
+			echo '<tr>';
+			echo '<td>'.$row['nameDevices'].'</td>';
+			echo '<td>'.$row['modelDevices'].'</td>';
+			echo '<td>'.$row['brandDevices'].'</td>';
+			echo '<td>'.$row['descriptionDevices'].'</td>';
+			echo '<td>'.$row['addressDevices'].'</td>';
+			echo '<td>'.$row['ownerDevices'].'</td>';
+			echo '<td>'.$row['categoryDevices'].'</td>';
+			echo $row['ID'];
+			if($row['bookerIdDevices'] == NULL){
+				echo $row['ID'];
+				echo '<td><form action="includes/editDevices.inc.php" method="post">
+							<input type="hidden" name="deleteId" value='.$row['ID'].'>
+							<input type="submit" name="delete-submit" value="Delete" />
+					</form></td>';
+
+
+			}
+			echo '</tr>';
+		}
+	}
+
 ?>
+
+</form>
