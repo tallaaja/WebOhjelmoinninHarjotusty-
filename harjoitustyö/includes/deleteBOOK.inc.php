@@ -1,48 +1,37 @@
 <?php
 session_start();
-?>
 
-<?php
-
-
-if (isset($_POST['bookthis'])) {
+if (isset($_POST['deletebook-submit'])) {
     require 'dbh.inc.php';
-    $bookId = $_POST['bookId'];
-    $status = $_POST['status'];
+    $deleteId = $_POST['deleteId'];
 
-    if (isset($_SESSION['userId'])) {
-        $userId = $_SESSION['userId'];
-    }
-    else{
-        $userId = "null";
-    }
-
-    $sql = "SELECT bookerIdDevices FROM devices WHERE ID =?";
+    $sql = "SELECT * FROM devices WHERE ID = ?";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("Location: ../signup.php?error=sqlerror");
         exit();
     }
     else {
-        mysqli_stmt_bind_param($stmt, "s", $userId);
+        mysqli_stmt_bind_param($stmt, "s", $deleteId);
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
 
-        $sql = "UPDATE devices SET bookerIdDevices = '$userId', STATUS = '$status' WHERE ID = '$bookId'";
+        $sql = "UPDATE devices SET `STATUS`= NULL, `bookerIdDevices` = null WHERE ID = '$deleteId'";
         $stmt = mysqli_stmt_init($conn);
         if ($conn->query($sql) === TRUE) {
             //echo "Record updated successfully";
-            header("Location: ../index.php?successfullybooked");
+            header("Location: ../index.php?successfullydeleted");
             exit();
         } else {
             //echo "Error updating record: " . $conn->error;
-            header("Location: ../index.php?sqlerror3");
+            header("Location: ../index.php?sqlerror2");
         }
     }
     mysqli_close($conn);
 
 }
 
-
-
+else{
+    echo "pserereikä";
+}
 ?>

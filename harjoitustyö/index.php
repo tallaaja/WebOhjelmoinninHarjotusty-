@@ -111,6 +111,7 @@ table, th, td {
 								if($row['bookerIdDevices'] == NULL){
 									echo '<td><form action="includes/book.inc.php" method="post">
 												<input type="hidden" name="bookId" value='.$row['ID'].'>
+												<input type="hidden" name="status" value="VARATTU">
 												<input type="submit" name="bookthis" value="Book" />
 										</form></td>';
 								}

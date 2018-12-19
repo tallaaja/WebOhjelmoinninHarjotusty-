@@ -46,12 +46,12 @@ if ($result->num_rows > 0) {
         </form>
         <li><a href="changepassword.php">Change password</a></li>
 
-<h2>Booked devices</h2>
+<h2>Your devices</h2>
 <?php
 if (isset($_SESSION["userId"]))
 {
   $sql = "SELECT `ID`, `nameDevices`, `modelDevices`, `brandDevices`, `descriptionDevices`,
-   `addressDevices`, `ownerDevices`, `categoryDevices`, `bookerIdDevices` FROM devices WHERE bookerIdDevices = $userId";
+   `addressDevices`, `ownerDevices`, `categoryDevices`, `bookerIdDevices`, `STATUS` FROM devices WHERE bookerIdDevices = $userId";
   $result = $conn->query($sql);
   echo '<table>';
   echo '<tr>';
@@ -62,6 +62,7 @@ if (isset($_SESSION["userId"]))
   echo '<th>Address</th>';
   echo '<th>Owner</th>';
   echo '<th>Category</th>';
+  echo '<th>Status</th>';
   while ($row = $result ->fetch_assoc()) {
     echo '<tr>';
     echo '<td>'.$row['nameDevices'].'</td>';
@@ -71,8 +72,17 @@ if (isset($_SESSION["userId"]))
     echo '<td>'.$row['addressDevices'].'</td>';
     echo '<td>'.$row['ownerDevices'].'</td>';
     echo '<td>'.$row['categoryDevices'].'</td>';
+    echo '<td>'.$row['STATUS'].'</td>';
 
+    if($row['STATUS'] == "VARATTU" ){
+    echo '<td><form action="includes/deleteBOOK.inc.php" method="post">
+        <input type="hidden" name="deleteId" value='.$row['ID'].'>
+        <input type="submit" name="deletebook-submit" value="Delete book" />
+    </form></td>';
+    }
     echo '</tr>';
+
+
   }
 }
 else {

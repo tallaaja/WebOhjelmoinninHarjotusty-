@@ -30,7 +30,7 @@ else {
 	$userId = "null";
 }
 $sql = "SELECT `ID`, `nameDevices`, `modelDevices`, `brandDevices`, `descriptionDevices`,
- `addressDevices`, `ownerDevices`, `categoryDevices`, `bookerIdDevices` FROM devices";
+ `addressDevices`, `ownerDevices`, `categoryDevices`, `bookerIdDevices`, `STATUS` FROM devices";
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 		echo '<h2> Edit or delete devices </h2>';
@@ -43,6 +43,7 @@ if ($result->num_rows > 0) {
 		echo '<th>Address</th>';
 		echo '<th>Owner</th>';
 		echo '<th>Category</th>';
+		echo '<th>Status</th>';
 		while($row = $result->fetch_assoc()) {
 			echo '<tr>';
 			echo '<td>'.$row['nameDevices'].'</td>';
@@ -52,16 +53,39 @@ if ($result->num_rows > 0) {
 			echo '<td>'.$row['addressDevices'].'</td>';
 			echo '<td>'.$row['ownerDevices'].'</td>';
 			echo '<td>'.$row['categoryDevices'].'</td>';
+			echo '<td>'.$row['STATUS'].'</td>';
+
+			if($row['STATUS'] == "LAINATTU" ){
+				echo '<td><form action="includes/deleteBorrow.inc.php" method="post">
+				<input type="hidden" name="deleteId" value='.$row['ID'].'>
+				<input type="submit" name="deleteborrow-submit" value="Delete borrownings" />
+				</form></td>';
+				echo '<td><form action="includes/returnDevice.inc.php" method="post">
+					<input type="hidden" name="returnId" value='.$row['ID'].'>
+					<input type="submit" name="return-submit" value="Return device" />
+				</form></td>';
+			}
+
+			if($row['STATUS'] == "VARATTU" ){
+				echo '<td><form action="includes/deleteBOOK.inc.php" method="post">
+				<input type="hidden" name="deleteId" value='.$row['ID'].'>
+				<input type="submit" name="deletebook-submit" value="Delete book" />
+				</form></td>';
+				echo '<td><form action="includes/borrowDevice.inc.php" method="post">
+				<input type="hidden" name="borrowId" value='.$row['ID'].'>
+				<input type="submit" name="borrow-submit" value="Borrow this" />
+				</form></td>';
+			}
+
 			if($row['bookerIdDevices'] == NULL){
-				echo $row['ID'];
 				echo '<td><form action="includes/deleteDevices.inc.php" method="post">
 							<input type="hidden" name="deleteId" value='.$row['ID'].'>
-							<input type="submit" name="delete-submit" value="Delete" />
+							<input type="submit" name="delete-submit" value="Delete device" />
 					</form></td>';
 			}
 			echo '<td><form action="editDevices.php" method="post">
 						<input type="hidden" name="editId" value='.$row['ID'].'>
-						<input type="submit" name="edit-submit" value="edit" />
+						<input type="submit" name="edit-submit" value="Edit device" />
 				</form></td>';
 			}
 			echo '</tr>';
