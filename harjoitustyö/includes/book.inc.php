@@ -27,7 +27,7 @@ if (isset($_POST['bookthis'])) {
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
 
-        $sql = "UPDATE devices SET bookerIdDevices = '$userId' WHERE ID = '$bookId'";	
+        $sql = "UPDATE devices SET bookerIdDevices = '$userId' WHERE ID = '$bookId'";
         $stmt = mysqli_stmt_init($conn);
         if ($conn->query($sql) === TRUE) {
             //echo "Record updated successfully";
@@ -37,8 +37,8 @@ if (isset($_POST['bookthis'])) {
             //echo "Error updating record: " . $conn->error;
             header("Location: ../index.php?sqlerror");
         }
-    } 	
-    mysqli_close($conn);	
+    }
+    mysqli_close($conn);
 
 }
 
