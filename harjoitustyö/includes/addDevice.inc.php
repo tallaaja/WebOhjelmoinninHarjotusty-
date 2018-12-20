@@ -20,6 +20,7 @@ if (isset($_POST['addDevice-Submit'])) {
   else {
 	  mysqli_stmt_bind_param($stmt, "sssssss", $name, $model, $brand, $desc, $address, $owner, $category);
 	  mysqli_stmt_execute($stmt);
+
 	  header("Location: ../admin.php?success");
 	  exit();
   }

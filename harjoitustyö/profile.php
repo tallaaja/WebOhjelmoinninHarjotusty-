@@ -1,7 +1,9 @@
 <?php
 include 'header.php';
 ?>
-
+<main>
+  <div class="wrapper-main">
+    <section class="section-default">
 <?php
 
 require 'includes/dbh.inc.php';
@@ -21,30 +23,28 @@ $sql = "SELECT idUsers, uidUsers, emailUsers FROM users WHERE idUsers = $userId"
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    // output data of each row
-
     while($row = $result->fetch_assoc()) {
-        //echo '<input type="text" name="uidUsers" value="'.$row['uidUsers'].'"><br><br>';
-        //echo '<input type="text" name="emailUsers" value="'.$row['emailUsers'].'"><br><br>';
         $username =$row['uidUsers'];
         $email = $row['emailUsers'];
-            //echo '<button type="submit" name="update-submit">Change name and/or email</button>';
-
     }
-
-
 } else {
     echo "0 results";
     header("Location: ../index.php?error=somethingwentwrong");
 }
 
 ?>
-        <form action="updateinfo.inc.php" method="post">
-            <input type="text" name="uidUsers" value="<?= $username?>"><br><br>
-            <input type="text" name="emailUsers" value="<?= $email?>"><br><br>
-            <button type="submit" name="update-submit">Change name and/or email</button><br><br>
-        </form>
-        <li><a href="changepassword.php">Change password</a></li>
+  <h2>Edit user info</h2>
+    <form action="includes/updateinfo.inc.php" method="post">
+        <input type="text" name="uidUsers" value="<?= $username?>"><br><br>
+        <input type="text" name="emailUsers" value="<?= $email?>"><br><br>
+        <button type="submit" name="update-submit">Change name and/or email</button><br><br>
+    </form>
+    <form action="includes/updateinfo.inc.php" method="post">
+      <input type="password" name="oldPwd" placeholder="Your old password"><br><br>
+      <input type="password" name="newPwd" placeholder="New password"><br><br>
+      <input type="password" name="newPwd2" placeholder="New password again"><br><br>
+      <button type="submit" name="password-change">Change password</button><br><br>
+    </form>
 
 <h2>Your devices</h2>
 <?php
@@ -88,5 +88,7 @@ if (isset($_SESSION["userId"]))
 else {
   echo '<p> You dont have any booked devices </p>';
 }
-
 ?>
+    </section>
+    <div>
+</main>

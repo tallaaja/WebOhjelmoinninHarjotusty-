@@ -2,18 +2,15 @@
 	require "includes/dbh.inc.php";
 	require "header.php";
 ?>
-<style>
-table, th, td {
-  border: 1px solid black;
-}</style>
+
 	<main>
 		<div class="wrapper-main">
 			<section class="section-default">
-
+				<h2>Search Devices</h2>
 
 			<?php
-				
-				
+
+
 
 				if (isset($_SESSION["userId"])) {
 
@@ -23,8 +20,8 @@ table, th, td {
 					<input type="text" name="brand" placeholder="Brand">
 					<input type="text" name="desc" placeholder="Description">
 					<input type="text" name="address" placeholder="Address">
-					<input type="text" name="owner" placeholder="Owner">	
-					<input type="text" name="category" placeholder="Category">	
+					<input type="text" name="owner" placeholder="Owner">
+					<input type="text" name="category" placeholder="Category">
 					<button type="submit" name="search-submit">Search</button>
 			</form>';
 
@@ -38,7 +35,7 @@ table, th, td {
 						$owner = $_POST["owner"];
 						$category = $_POST["category"];
 						$sql = "SELECT `ID`, `nameDevices`, `modelDevices`, `brandDevices`, `descriptionDevices`,
-						`addressDevices`, `ownerDevices`, `categoryDevices` FROM devices 
+						`addressDevices`, `ownerDevices`, `categoryDevices` FROM devices
 						WHERE `nameDevices` LIKE '%{$name}%' AND
 						`modelDevices` LIKE '%{$model}%' AND
 						`brandDevices` LIKE '%{$brand}%' AND
@@ -46,7 +43,7 @@ table, th, td {
 						`addressDevices` LIKE'%{$address}%' AND
 						`ownerDevices` LIKE'%{$owner}%' AND
 						`categoryDevices` LIKE'%{$category}%'";
-	
+
 						$result = $conn->query($sql);
 						if (!$result) {
 							trigger_error('Invalid query: ' . $conn->error);
@@ -73,16 +70,17 @@ table, th, td {
 									echo '<td>'.$row['ownerDevices'].'</td>';
 									echo '<td>'.$row['categoryDevices'].'</td>';
 									echo '</tr>';
-	
+
 							}
 						}
 						else{
 							echo "nothing found";
 						}
-	
+
 					}
 
 					echo '<p> </p>';
+					echo '<h2>List of devices</h2>';
 					$sql = "SELECT `ID`, `nameDevices`, `modelDevices`, `brandDevices`, `descriptionDevices`,
 					 `addressDevices`, `ownerDevices`, `categoryDevices`, `bookerIdDevices` FROM devices";
 					$result = $conn->query($sql);
@@ -111,7 +109,7 @@ table, th, td {
 								if($row['bookerIdDevices'] == NULL){
 									echo '<td><form action="includes/book.inc.php" method="post">
 												<input type="hidden" name="bookId" value='.$row['ID'].'>
-												<input type="hidden" name="status" value="VARATTU">
+												<input type="hidden" name="status" value="BOOKED">
 												<input type="submit" name="bookthis" value="Book" />
 										</form></td>';
 								}
@@ -133,7 +131,3 @@ table, th, td {
 			</section>
 		<div>
 	</main>
-
-<?php
-	require "footer.php";
-?>

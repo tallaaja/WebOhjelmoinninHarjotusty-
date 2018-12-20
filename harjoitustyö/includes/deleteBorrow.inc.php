@@ -16,10 +16,9 @@ if (isset($_POST['deleteborrow-submit'])) {
         mysqli_stmt_execute($stmt);
         mysqli_stmt_store_result($stmt);
 
-        $sql = "UPDATE devices SET `STATUS`= 'VARATTU' WHERE ID = '$deleteId'";
+        $sql = "UPDATE devices SET `STATUS`= 'BOOKED' WHERE ID = '$deleteId'";
         $stmt = mysqli_stmt_init($conn);
         if ($conn->query($sql) === TRUE) {
-            //echo "Record updated successfully";
             header("Location: ../admin.php?successfullyupdated");
             exit();
         } else {
