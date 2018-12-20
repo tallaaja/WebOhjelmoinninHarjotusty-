@@ -1,4 +1,6 @@
-
+<?php
+	session_start();
+?>
 <?php
 if (isset($_POST['update-submit'])) {
     require 'dbh.inc.php';
@@ -40,17 +42,18 @@ if (isset($_POST['update-submit'])) {
 				exit();
 			}
 			else {
-
-        $sql = "UPDATE users SET uidUsers=?, emailUsers=? WHERE idUsers= '$userid'";
-        if (!mysqli_stmt_prepare($stmt, $sql)) {
-          echo '$sql';
-        }
-        else {
-          mysqli_stmt_bind_param($stmt, "ss", $username, $email);
-          mysqli_stmt_execute($stmt);
-          header("Location: ../profile.php?success");
-          exit();
-        }
+                $sql = "UPDATE users SET uidUsers='$username', emailUsers='$email' WHERE idUsers= '$userid'";
+                $stmt = mysqli_stmt_init($conn);
+                if (!mysqli_stmt_prepare($stmt, $sql)) {
+                    header("Location: ../profile.php?errorsql");
+                    exit();
+                }
+                else {
+                    mysqli_stmt_bind_param($stmt, "ss", $username, $email);
+                    mysqli_stmt_execute($stmt);
+                    header("Location: ../profile.php?success");
+                    exit();
+                }
 
 			}
         }

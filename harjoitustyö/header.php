@@ -16,10 +16,10 @@
 			<ul class="header-links">
 				<li><a href="index.php">Home</a></li>
 				<?php
-					if (isset($_SESSION["userID"])) {
+					if (isset($_SESSION["userId"])) {
 						echo '<li><a href="profile.php">Profile</a></li>';
 					}
-					if (isset($_SESSION["userID"])) {
+					if (isset($_SESSION["userId"]) && $_SESSION["userId"] == 1) {
 						echo '<li><a href="admin.php">Admin</a></li>';
 					}
 				?>
